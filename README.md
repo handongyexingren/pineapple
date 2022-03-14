@@ -49,7 +49,7 @@ Don't worry, we have other pineapple-lang implements for you:
 
 # Contributors
 
-- [karminski](https://github.com/karminski)
+- [handongyexingren](https://github.com/handongyexingren)
 
 # License
 

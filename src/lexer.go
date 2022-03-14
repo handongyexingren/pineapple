@@ -38,6 +38,7 @@ var keywords = map[string]int{
 }
 
 // regex match patterns
+// 以下划线，
 var regexName = regexp.MustCompile(`^[_\d\w]+`)
 
 // lexer struct
@@ -57,6 +58,7 @@ func (lexer *Lexer) GetLineNum() int {
     return lexer.lineNum
 }
 
+// 断言下一个token类型
 func (lexer *Lexer) NextTokenIs(tokenType int) (lineNum int, token string) {
     nowLineNum, nowTokenType, nowToken := lexer.GetNextToken()
     // syntax error
@@ -67,6 +69,7 @@ func (lexer *Lexer) NextTokenIs(tokenType int) (lineNum int, token string) {
     return nowLineNum, nowToken
 }
 
+// 判断下一个token是否是指定类型，如果是则跳过，如果不是则不跳过
 func (lexer *Lexer) LookAheadAndSkip(expectedType int) {
     // get next token
     nowLineNum                := lexer.lineNum
@@ -80,6 +83,7 @@ func (lexer *Lexer) LookAheadAndSkip(expectedType int) {
     }
 }
 
+// 看一看下一个token的类型
 func (lexer *Lexer) LookAhead() int {
     // lexer.nextToken* already setted
     if lexer.nextTokenLineNum > 0 {
@@ -103,6 +107,7 @@ func (lexer *Lexer) skipSourceCode(n int) {
     lexer.sourceCode = lexer.sourceCode[n:]
 }
 
+// 是否是空格
 func (lexer *Lexer) isIgnored() bool {
     isIgnored := false
     // target pattern
@@ -156,6 +161,7 @@ func (lexer *Lexer) scanBeforeToken(token string) string {
     return s[0]
 }
 
+// 查找以下划线/数字/字母开头的名字
 func (lexer *Lexer) scanName() string {
     return lexer.scan(regexName)
 }
@@ -205,6 +211,7 @@ func (lexer *Lexer) MatchToken() (lineNum int, tokenType int, token string) {
         lexer.skipSourceCode(1)
         return lexer.lineNum, TOKEN_QUOTE, "\""
     }
+    
     // check multiple character token
     if lexer.sourceCode[0] == '_' || isLetter(lexer.sourceCode[0]) {
         token := lexer.scanName()

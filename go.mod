@@ -1,4 +1,4 @@
-module github.com/karminski/pineapple
+module pineapple
 
 go 1.15
 
