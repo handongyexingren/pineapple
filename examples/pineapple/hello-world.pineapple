@@ -1,2 +1,4 @@
 $a = "pen pineapple apple pen."
 print($a)
+$b = "hello, world"
+print($b)
